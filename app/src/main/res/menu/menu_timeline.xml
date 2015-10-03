@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.codepath.apps.mysimpletweets.Activities.TimelineActivity">
+
+    <item android:id="@+id/icn_compose"
+        android:title="@string/compose_label"
+        android:icon="@drawable/ic_compose"
+        app:showAsAction="always" />
+</menu>

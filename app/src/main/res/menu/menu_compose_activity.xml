@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.codepath.apps.mysimpletweets.Activities.Compose_activity">
+
+    <item
+        android:id="@+id/btn_tweet"
+        android:title="@string/tweet_label"
+        android:icon="@drawable/ic_tweet"
+        app:showAsAction="always" />
+</menu>
