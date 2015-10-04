@@ -101,15 +101,16 @@ public class Compose_activity extends ActionBarActivity {
     public void onTweet(MenuItem mi) {
         String Tweet = et_message.getText().toString();
         if(!Tweet.equals("")){
-        et_message.setText("");
+
             Long tsLong = System.currentTimeMillis()/1000;
-            String ts = tsLong.toString();
+            String ts = tsLong.toString();Intent i = new Intent();
+
             client.postNewTweet(Tweet, ts, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
                 tweet composedTweet = tweet.fromJson(json);
-
+                et_message.setText("");
                 /*status=test&in_reply_to=cs480test2&oauth_version=1.0&oauth_nonce=XXXXXX&
                 oauth_timestamp=1411668337&oauth_consumer_key=XXXXXXX&oauth_token=XXXXXXXX&
                 oauth_signature_method=HMAC-SHA1&oauth_signature=XXXXX*/

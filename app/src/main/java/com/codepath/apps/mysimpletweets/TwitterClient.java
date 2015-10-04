@@ -25,9 +25,9 @@ import com.loopj.android.http.RequestParams;
  */
 public class TwitterClient extends OAuthBaseClient {
 	public static final Class<? extends Api> REST_API_CLASS = TwitterApi.class; // Change this
-	public static final String REST_URL = " https://api.twitter.com/1.1"; // Change this, base API URL
+	public static final String REST_URL = "https://api.twitter.com/1.1"; // Change this, base API URL
 	public static final String REST_CONSUMER_KEY = "xxxxxxx";       // Change this
-	public static final String REST_CONSUMER_SECRET = "xxxxxxxxxxxxxxxxxx"; // Change this
+	public static final String REST_CONSUMER_SECRET = "xxxxxxxx"; // Change this
 	public static final String REST_CALLBACK_URL = "oauth://cpsimpletweets"; // Change this (here and in manifest)
 
 	public TwitterClient(Context context) {
@@ -69,7 +69,7 @@ public class TwitterClient extends OAuthBaseClient {
 	public void getCurrentUser(AsyncHttpResponseHandler handler){
 		String apiUrl = getApiUrl("account/verify_credentials.json");
 		RequestParams params = new RequestParams();
-		params.put("skip_status",0);
+		params.put("include_entities",true);
 		getClient().get(apiUrl, params, handler);
 	}
 
@@ -85,8 +85,9 @@ public class TwitterClient extends OAuthBaseClient {
 		reqParams.put("auth_token","2224544698-RlrEyHTo9vtSxF6fkDhhPdjLK0pKyMmmxkfv7oS");
 		reqParams.put("auth_version","1.0");*/
 		reqParams.put("status", data);
-		String url = client.getUrlWithQueryString(true, "https://api.twitter.com/1.1/statuses/update.json",reqParams);
-		client.post(apiUrl, reqParams, asyncHandler);
+		String url = client.getUrlWithQueryString(true, "https://api.twitter.com/1.1/statuses/update.json", reqParams);
+		getClient().post(apiUrl, reqParams, asyncHandler);
+
 
 
 	}

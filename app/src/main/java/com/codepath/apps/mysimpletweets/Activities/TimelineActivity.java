@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import com.codepath.apps.mysimpletweets.adapter.TweetsArrayAdapter;
 import com.codepath.apps.mysimpletweets.models.tweet;
-import com.codepath.apps.mysimpletweets.models.newPostModel;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApp;
 import com.codepath.apps.mysimpletweets.TwitterClient;
@@ -29,7 +28,6 @@ public class TimelineActivity extends ActionBarActivity {
     private TweetsArrayAdapter aTweets;
     private ListView lvTweets;
     private long maxId=0;
-    private newPostModel newPost;
 //    private newPostModel newPost;
     private int REQUEST_TWEET_CODE = 50;
 
