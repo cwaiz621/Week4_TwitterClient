@@ -14,6 +14,11 @@ public class User{
     private long uid;
     private String screenName;
     private String profileImageUrl;
+    private String Tagline;
+    private int followersCount;
+    private int followingCount;
+    private int tweetsCount;
+    private String backgroundImageUrl;
 
 
     public void setName(String name) {
@@ -32,6 +37,26 @@ public class User{
         this.profileImageUrl = profileImageUrl;
     }
 
+    public String getTagline() {
+        return Tagline;
+    }
+
+    public int getFollowersCount() {
+        return followersCount;
+    }
+
+    public int getFollowingCount() {
+        return followingCount;
+    }
+
+    public int getTweetsCount() {
+        return tweetsCount;
+    }
+
+    public String getBackgroundImageUrl() {
+        return backgroundImageUrl;
+    }
+
     //deserialize the user json into USer object
     public static User fromJson(JSONObject json){
         User u = new User();
@@ -40,6 +65,13 @@ public class User{
             u.uid = json.getLong("id");
             u.screenName = json.getString("screen_name");
             u.profileImageUrl = json.getString("profile_image_url");
+            u.Tagline = json.getString("description");
+            u.followersCount = json.getInt("followers_count");
+            u.followingCount = json.getInt("friends_count");
+            u.tweetsCount = json.getInt("statuses_count");
+            u.backgroundImageUrl = json.getString("profile_background_image_url");
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

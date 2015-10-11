@@ -9,6 +9,7 @@ import android.content.Context;
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 /*
@@ -24,73 +25,95 @@ import com.loopj.android.http.RequestParams;
  * 
  */
 public class TwitterClient extends OAuthBaseClient {
-	public static final Class<? extends Api> REST_API_CLASS = TwitterApi.class; // Change this
-	public static final String REST_URL = "https://api.twitter.com/1.1"; // Change this, base API URL
-	public static final String REST_CONSUMER_KEY = "xxxxxxx";       // Change this
-	public static final String REST_CONSUMER_SECRET = "xxxxxxxx"; // Change this
-	public static final String REST_CALLBACK_URL = "oauth://cpsimpletweets"; // Change this (here and in manifest)
+    public static final Class<? extends Api> REST_API_CLASS = TwitterApi.class; // Change this
+    public static final String REST_URL = "https://api.twitter.com/1.1"; // Change this, base API URL
+    public static final String REST_CONSUMER_KEY = "weQBSdPuO0z5iWNCSItPog4NR";       // Change this
+    public static final String REST_CONSUMER_SECRET = "Kn7ZOPBrUlvLGJ4u9FUzTpIddAcxBnpOmxs8j0SoXgUHbSJAHi"; // Change this // Change this
+    public static final String REST_CALLBACK_URL = "oauth://cpsimpletweets"; // Change this (here and in manifest)
 
-	public TwitterClient(Context context) {
-		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
-	}
+    public TwitterClient(Context context) {
+        super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
+    }
 
-	// CHANGE THIS
-	// DEFINE METHODS for different API endpoints here
-	public void getInterestingnessList(AsyncHttpResponseHandler handler) {
-		String apiUrl = getApiUrl("?nojsoncallback=1&method=flickr.interestingness.getList");
-		// Can specify query string params directly or through RequestParams.
-		RequestParams params = new RequestParams();
-		params.put("format", "json");
-		client.get(apiUrl, params, handler);
-	}
-	//METHOD == Endpoint
-	//Home timeline - gets us the home timeline
-	//Endpoints:
-	//		-Get the home timeline for the user
-	//GET statuses/home_timeline.json
-	//		count = 25
-	//since_id=1 (return all tweets sorted by the most recent)
+    // CHANGE THIS
+    // DEFINE METHODS for different API endpoints here
+    public void getInterestingnessList(AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("?nojsoncallback=1&method=flickr.interestingness.getList");
+        // Can specify query string params directly or through RequestParams.
+        RequestParams params = new RequestParams();
+        params.put("format", "json");
+        client.get(apiUrl, params, handler);
+    }
+    //METHOD == Endpoint
+    //Home timeline - gets us the home timeline
+    //Endpoints:
+    //		-Get the home timeline for the user
+    //GET statuses/home_timeline.json
+    //		count = 25
+    //since_id=1 (return all tweets sorted by the most recent)
 
-	//Define end point
-	public void getHomeTimeline(AsyncHttpResponseHandler handler, long maxId){
-		String apiUrl= getApiUrl("statuses/home_timeline.json");
-		//specify the params
-		RequestParams params= new RequestParams();
-		params.put("count", 25);
-		if(maxId == 0){
-			params.put("since_id",1);
-		}else{
-			params.put("max_id",maxId );
-		}
-		//execute the request --reading so get request method, if writing post
-		getClient().get(apiUrl,params,handler);
-	}
+    //Define end point
+    public void getHomeTimeline(AsyncHttpResponseHandler handler, long maxId) {
+        String apiUrl = getApiUrl("statuses/home_timeline.json");
+        //specify the params
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        if (maxId == 0) {
+            params.put("since_id", 1);
+        } else {
+            params.put("max_id", maxId);
+        }
+        //execute the request --reading so get request method, if writing post
+        getClient().get(apiUrl, params, handler);
+    }
 
-	public void getCurrentUser(AsyncHttpResponseHandler handler){
-		String apiUrl = getApiUrl("account/verify_credentials.json");
-		RequestParams params = new RequestParams();
-		params.put("include_entities",true);
-		getClient().get(apiUrl, params, handler);
-	}
-
-
-	public void postNewTweet(String data, String timestamp, AsyncHttpResponseHandler asyncHandler) {
-		String apiUrl = getApiUrl("statuses/update.json");
-
-		RequestParams reqParams = new RequestParams();
-		/*reqParams.put("oauth_consumer_key", REST_CONSUMER_KEY);
-		reqParams.put("oauth_nonce", "8204648ca4271aaa4ade8fa8b979bbc");
-		reqParams.put("oauth_signature_method", "HMAC-SHA1");
-		reqParams.put("oauth_timestamp", timestamp);
-		reqParams.put("auth_token","2224544698-RlrEyHTo9vtSxF6fkDhhPdjLK0pKyMmmxkfv7oS");
-		reqParams.put("auth_version","1.0");*/
-		reqParams.put("status", data);
-		String url = client.getUrlWithQueryString(true, "https://api.twitter.com/1.1/statuses/update.json", reqParams);
-		getClient().post(apiUrl, reqParams, asyncHandler);
+    public void getCurrentUser(AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("account/verify_credentials.json");
+        RequestParams params = new RequestParams();
+        params.put("include_entities", true);
+        getClient().get(apiUrl, params, handler);
+    }
 
 
+    public void postNewTweet(String data, AsyncHttpResponseHandler asyncHandler) {
+        String apiUrl = getApiUrl("statuses/update.json");
 
-	}
+        RequestParams reqParams = new RequestParams();
+        reqParams.put("status", data);
+        String url = client.getUrlWithQueryString(true, "https://api.twitter.com/1.1/statuses/update.json", reqParams);
+        getClient().post(apiUrl, reqParams, asyncHandler);
+
+
+    }
+
+    public void getMentionTimeline(JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/mention_timeline.json");
+        //specify the params
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        //execute the request --reading so get request method, if writing post
+        getClient().get(apiUrl, params, handler);
+    }
+
+    public void getUserTimeline(String screenname, AsyncHttpResponseHandler handler){
+        String url =getApiUrl("statuses/user_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        params.put("screen_name", screenname);
+        //execute the request --reading so get request method, if writing post
+        getClient().get(url, params, handler);
+
+    }
+
+    public void getUserProfile(String screenname, AsyncHttpResponseHandler handler){
+        String url =getApiUrl("users/show.json");
+        RequestParams params = new RequestParams();
+        params.put("screen_name", screenname);
+
+        //execute the request --reading so get request method, if writing post
+        getClient().get(url, params, handler);
+
+    }
 
 
 

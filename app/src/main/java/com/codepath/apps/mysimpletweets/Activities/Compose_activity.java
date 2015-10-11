@@ -103,9 +103,9 @@ public class Compose_activity extends ActionBarActivity {
         if(!Tweet.equals("")){
 
             Long tsLong = System.currentTimeMillis()/1000;
-            String ts = tsLong.toString();Intent i = new Intent();
+            //String ts = tsLong.toString();Intent i = new Intent();
 
-            client.postNewTweet(Tweet, ts, new JsonHttpResponseHandler() {
+            client.postNewTweet(Tweet, new JsonHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject json) {

@@ -11,6 +11,8 @@
     <string name="title_activity_compose_activity">Compose_activity</string>
     <string name="Profile_name_label">Profile Name</string>
     <string name="tweetlabel">tweet</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_profile_fragment">ProfileFragment</string>
 
 
 </resources>

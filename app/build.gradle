@@ -32,4 +32,11 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.8'
     // ActiveAndroid for simple persistence with an ORM
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+//Sliding Strip
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    //swipe refresh layout
+    compile 'com.android.support:support-v4:22.2.1'
+
+
+
 }

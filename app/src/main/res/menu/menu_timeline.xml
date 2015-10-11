@@ -3,8 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.codepath.apps.mysimpletweets.Activities.TimelineActivity">
 
+    <item android:id="@+id/miProfile"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_profile"
+        android:title="Profile"
+        android:onClick="onProfileView"
+        />
+
+
     <item android:id="@+id/icn_compose"
         android:title="@string/compose_label"
         android:icon="@drawable/ic_compose"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/miActionProgress"
+        android:title="Loading..."
+        android:visible="false"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        app:actionLayout="@layout/progress_bar" />
 </menu>
